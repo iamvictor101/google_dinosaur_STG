@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuycgqtygoi1u"]
+
+[ext_resource type="Script" path="res://Player/torch/torch.gd" id="1_q1rit"]
+[ext_resource type="Texture2D" uid="uid://chiwhajivs146" path="res://Player/torch/torch.png" id="2_kbqo8"]
+[ext_resource type="Script" path="res://classes/Hitbox.gd" id="3_egjy5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl1u6"]
+size = Vector2(12, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36gab"]
+size = Vector2(100, 53)
+
+[node name="torch" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_q1rit")
+enterd = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -21.5)
+shape = SubResource("RectangleShape2D_yl1u6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("2_kbqo8")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 64
+script = ExtResource("3_egjy5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -16.5)
+shape = SubResource("RectangleShape2D_36gab")

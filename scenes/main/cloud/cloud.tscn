@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1s1ngmrl2q2o"]
+
+[ext_resource type="Script" path="res://scenes/main/cloud/cloud.gd" id="1_2hk4f"]
+[ext_resource type="Texture2D" uid="uid://djimmkewa1roy" path="res://scenes/main/cloud/cloud.png" id="2_6foa8"]
+
+[node name="Cloud" type="Node2D"]
+z_index = -99
+script = ExtResource("1_2hk4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("2_6foa8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -11)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

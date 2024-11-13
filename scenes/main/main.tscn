@@ -1,0 +1,238 @@
+[gd_scene load_steps=18 format=4 uid="uid://yhsckaheevkr"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_e7c56"]
+[ext_resource type="Texture2D" uid="uid://c0cjs0fa5yh8t" path="res://wall/camera_bounds.png" id="2_24dy2"]
+[ext_resource type="Texture2D" uid="uid://bqjg0kgmxf6e3" path="res://scenes/main/floor.png" id="3_d1pjq"]
+[ext_resource type="Texture2D" uid="uid://i5mpaln3go3m" path="res://scenes/main/sky.png" id="3_ffckj"]
+[ext_resource type="PackedScene" uid="uid://qu6uau75r37j" path="res://Player/player.tscn" id="5_k6awq"]
+[ext_resource type="Theme" uid="uid://8g0fo2aq0dbm" path="res://ui/ui_theme.tres" id="5_sqr0w"]
+[ext_resource type="Texture2D" uid="uid://cu3xe4thi0w0k" path="res://ui/accelerate.png" id="6_oh1m4"]
+[ext_resource type="Texture2D" uid="uid://cdieou17bf7og" path="res://ui/unobstructed.png" id="7_2bvk0"]
+[ext_resource type="Texture2D" uid="uid://b7lbxjcw8lg3p" path="res://ui/invincible.png" id="8_ciwa5"]
+[ext_resource type="Texture2D" uid="uid://b816s4w1f5lng" path="res://ui/go_on.png" id="10_efhgh"]
+[ext_resource type="Texture2D" uid="uid://cmi2xv1sdlcre" path="res://ui/out.png" id="12_mupqr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cotoh"]
+texture = ExtResource("2_24dy2")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_j2d7s"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_cotoh")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7gge"]
+texture = ExtResource("2_24dy2")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_d777s"]
+physics_layer_0/collision_layer = 128
+physics_layer_0/collision_mask = 128
+sources/0 = SubResource("TileSetAtlasSource_n7gge")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpfwf"]
+texture = ExtResource("2_24dy2")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_hpo3w"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_fpfwf")
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_e7c56")
+metadata/_edit_horizontal_guides_ = [304.0, 300.0, 243.0, 157.0]
+metadata/_edit_vertical_guides_ = [480.0, 371.0]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
+tile_map_data = PackedByteArray("AAD//xIAAAAAAAAAAAAAABIAAAAAAAAAAAABABIAAAAAAAAAAAACABIAAAAAAAAAAAADABIAAAAAAAAAAAAEABIAAAAAAAAAAAAFABIAAAAAAAAAAAAGABIAAAAAAAAAAAAHABIAAAAAAAAAAAAIABIAAAAAAAAAAAAJABIAAAAAAAAAAAAKABIAAAAAAAAAAAALABIAAAAAAAAAAAAMABIAAAAAAAAAAAANABIAAAAAAAAAAAAOABIAAAAAAAAAAAAPABIAAAAAAAAAAAAQABIAAAAAAAAAAAARABIAAAAAAAAAAAASABIAAAAAAAAAAAATABIAAAAAAAAAAAAUABIAAAAAAAAAAAAVABIAAAAAAAAAAAAWABIAAAAAAAAAAAAXABIAAAAAAAAAAAAYABIAAAAAAAAAAAAZABIAAAAAAAAAAAAaABIAAAAAAAAAAAAbABIAAAAAAAAAAAAcABIAAAAAAAAAAAAdABIAAAAAAAAAAAAeABIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_j2d7s")
+
+[node name="AirWall" type="TileMapLayer" parent="."]
+visible = false
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAD//wcAAAAAAAAAAAD//wgAAAAAAAAAAAD//wkAAAAAAAAAAAD//woAAAAAAAAAAAD//wsAAAAAAAAAAAD//wwAAAAAAAAAAAD//w0AAAAAAAAAAAD//w4AAAAAAAAAAAD//w8AAAAAAAAAAAD//xAAAAAAAAAAAAD//xEAAAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAP//AAAAAAAAAAAIAP//AAAAAAAAAAAJAP//AAAAAAAAAAAKAP//AAAAAAAAAAALAP//AAAAAAAAAAAMAP//AAAAAAAAAAANAP//AAAAAAAAAAAOAP//AAAAAAAAAAAPAP//AAAAAAAAAAAQAP//AAAAAAAAAAARAP//AAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAXAP//AAAAAAAAAAAYAP//AAAAAAAAAAAZAP//AAAAAAAAAAAaAP//AAAAAAAAAAAbAP//AAAAAAAAAAAcAP//AAAAAAAAAAAdAP//AAAAAAAAAAAeAP//AAAAAAAAAAAeAAAAAAAAAAAAAAAeAAEAAAAAAAAAAAAeAAIAAAAAAAAAAAAeAAMAAAAAAAAAAAAeAAQAAAAAAAAAAAAeAAUAAAAAAAAAAAAeAAYAAAAAAAAAAAAeAAcAAAAAAAAAAAAeAAgAAAAAAAAAAAAeAAkAAAAAAAAAAAAeAAoAAAAAAAAAAAAeAAsAAAAAAAAAAAAeAAwAAAAAAAAAAAAeAA0AAAAAAAAAAAAeAA4AAAAAAAAAAAAeAA8AAAAAAAAAAAAeABAAAAAAAAAAAAAeABEAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_d777s")
+
+[node name="camera" type="TileMapLayer" parent="."]
+visible = false
+tile_map_data = PackedByteArray("AAD//xMAAAABAAAAAAAeABMAAAABAAAAAAAeAP//AAABAAAAAAD/////AAABAAAAAAA=")
+tile_set = SubResource("TileSet_hpo3w")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="sky" type="Sprite2D" parent="ParallaxBackground/sky"]
+position = Vector2(240, 148)
+texture = ExtResource("3_ffckj")
+
+[node name="floor" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1200, 0)
+
+[node name="floor" type="Sprite2D" parent="ParallaxBackground/floor"]
+position = Vector2(586, 288)
+texture = ExtResource("3_d1pjq")
+
+[node name="Player" parent="." instance=ExtResource("5_k6awq")]
+position = Vector2(49, 264)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+ignore_rotation = false
+
+[node name="enemy_point" type="Marker2D" parent="."]
+position = Vector2(505, 292)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 99
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.5
+offset_top = -101.0
+offset_right = 220.5
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "按空格开始游戏"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 26.0
+offset_right = 212.0
+offset_bottom = 102.0
+theme = ExtResource("5_sqr0w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Accelerate" type="CheckBox" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("6_oh1m4")
+icon_alignment = 1
+
+[node name="Unobstructed" type="CheckBox" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("7_2bvk0")
+
+[node name="Invincible" type="CheckBox" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("8_ciwa5")
+
+[node name="Out_game" type="Button" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "退出游戏"
+clip_text = true
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="esc" type="Control" parent="CanvasLayer/Control2"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_sqr0w")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control2/esc"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -10.0
+offset_right = 34.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Go_on" type="Button" parent="CanvasLayer/Control2/esc/HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("10_efhgh")
+icon_alignment = 1
+
+[node name="Out" type="Button" parent="CanvasLayer/Control2/esc/HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("12_mupqr")
+icon_alignment = 1
+
+[node name="HI" type="Label" parent="CanvasLayer/Control2"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 132.0
+offset_top = -149.0
+offset_right = 239.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.396889, 0.396889, 0.396889, 1)
+text = "HI"
+
+[connection signal="die" from="Player" to="." method="_on_player_die"]
+[connection signal="toggled" from="CanvasLayer/Control/HBoxContainer/VBoxContainer/Accelerate" to="." method="_on_accelerate_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/HBoxContainer/VBoxContainer/Unobstructed" to="." method="_on_unobstructed_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/HBoxContainer/VBoxContainer/Invincible" to="." method="_on_invincible_toggled"]
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/VBoxContainer/Out_game" to="." method="_on_out_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/esc/HBoxContainer/Go_on" to="." method="_on_go_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/esc/HBoxContainer/Out" to="." method="_on_out_pressed"]

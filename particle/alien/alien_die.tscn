@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnvphikok1ufn"]
+
+[ext_resource type="Script" path="res://particle/alien/alien_die.gd" id="1_nwymi"]
+
+[sub_resource type="Gradient" id="Gradient_j8m0i"]
+offsets = PackedFloat32Array(0, 0.636771, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="alien_die" type="CPUParticles2D"]
+emitting = false
+amount = 11
+lifetime = 1.4
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 0.01
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 11.0
+linear_accel_min = 1.0
+linear_accel_max = 5.0
+color = Color(0.643137, 0.392157, 0.701961, 1)
+color_ramp = SubResource("Gradient_j8m0i")
+script = ExtResource("1_nwymi")

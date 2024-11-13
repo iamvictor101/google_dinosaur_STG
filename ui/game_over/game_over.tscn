@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6wtoim2jmfxs"]
+
+[ext_resource type="Script" path="res://ui/game_over/game_over.gd" id="1_41hgk"]
+[ext_resource type="Theme" uid="uid://8g0fo2aq0dbm" path="res://ui/ui_theme.tres" id="1_bindb"]
+[ext_resource type="Texture2D" uid="uid://cmi2xv1sdlcre" path="res://ui/out.png" id="3_nh063"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3lhmx"]
+
+[sub_resource type="Theme" id="Theme_xg2nd"]
+Label/styles/normal = SubResource("StyleBoxEmpty_3lhmx")
+
+[node name="game_over" type="ParallaxBackground"]
+process_mode = 3
+layer = 1
+script = ExtResource("1_41hgk")
+metadata/_edit_vertical_guides_ = [-25.0, 114.0, 15.0, 191.0]
+metadata/_edit_horizontal_guides_ = [195.0]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bindb")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -85.0
+offset_right = 151.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xg2nd")
+theme_override_colors/font_color = Color(0.197937, 0.197937, 0.197937, 1)
+theme_override_font_sizes/font_size = 67
+text = "Game_over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="out" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 24.0
+offset_right = 10.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("3_nh063")
+
+[connection signal="pressed" from="Control/out" to="." method="_on_out_pressed"]

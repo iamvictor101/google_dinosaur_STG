@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://diohh72f0a1qh"]
+
+[ext_resource type="Texture2D" uid="uid://dqmjtjwufo40l" path="res://particle/h_scrap/h_scrap-Sheet.png" id="1_ymj0p"]
+[ext_resource type="Script" path="res://particle/h_scrap/h_scrap.gd" id="2_e40cn"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gacox"]
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_b7y15"]
+offsets = PackedFloat32Array(0, 0.520179, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.879257, 0.879257, 0.879257, 1, 1, 1, 1, 0)
+
+[node name="h_scrap" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_gacox")
+emitting = false
+amount = 63
+lifetime = 3.1
+one_shot = true
+speed_scale = 11.0
+texture = ExtResource("1_ymj0p")
+emission_shape = 3
+emission_rect_extents = Vector2(4, 16)
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 30.0
+color_ramp = SubResource("Gradient_b7y15")
+anim_speed_min = 1.0
+anim_speed_max = 2.71
+anim_offset_max = 1.0
+script = ExtResource("2_e40cn")

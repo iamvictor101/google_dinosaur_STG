@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=4 uid="uid://yhsckaheevkr"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_e7c56"]
+[ext_resource type="Texture2D" uid="uid://c0cjs0fa5yh8t" path="res://wall/camera_bounds.png" id="2_24dy2"]
+[ext_resource type="Texture2D" uid="uid://bqjg0kgmxf6e3" path="res://scenes/main/floor.png" id="3_d1pjq"]
+[ext_resource type="Texture2D" uid="uid://i5mpaln3go3m" path="res://scenes/main/sky.png" id="3_ffckj"]
+[ext_resource type="PackedScene" uid="uid://qu6uau75r37j" path="res://Player/player.tscn" id="5_k6awq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cotoh"]
+texture = ExtResource("2_24dy2")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_j2d7s"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_cotoh")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpfwf"]
+texture = ExtResource("2_24dy2")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_hpo3w"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_fpfwf")
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_e7c56")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
+tile_map_data = PackedByteArray("AAAeABEAAAAAAAAAAAAeABAAAAAAAAAAAAAeAA8AAAAAAAAAAAAeAA4AAAAAAAAAAAAeAA0AAAAAAAAAAAAeAAwAAAAAAAAAAAAeAAsAAAAAAAAAAAAeAAoAAAAAAAAAAAAeAAkAAAAAAAAAAAAeAAgAAAAAAAAAAAAeAAcAAAAAAAAAAAAeAAYAAAAAAAAAAAAeAAUAAAAAAAAAAAAeAAQAAAAAAAAAAAAeAAMAAAAAAAAAAAAeAAIAAAAAAAAAAAAeAAEAAAAAAAAAAAAeAAAAAAAAAAAAAAAeAP//AAAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAP//AAAAAAAAAAAIAP//AAAAAAAAAAAJAP//AAAAAAAAAAAKAP//AAAAAAAAAAALAP//AAAAAAAAAAAMAP//AAAAAAAAAAANAP//AAAAAAAAAAAOAP//AAAAAAAAAAAPAP//AAAAAAAAAAAQAP//AAAAAAAAAAARAP//AAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAXAP//AAAAAAAAAAAYAP//AAAAAAAAAAAZAP//AAAAAAAAAAAaAP//AAAAAAAAAAAbAP//AAAAAAAAAAAcAP//AAAAAAAAAAAdAP//AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAD//wcAAAAAAAAAAAD//wgAAAAAAAAAAAD//wkAAAAAAAAAAAD//woAAAAAAAAAAAD//wsAAAAAAAAAAAD//wwAAAAAAAAAAAD//w0AAAAAAAAAAAD//w4AAAAAAAAAAAD//w8AAAAAAAAAAAD//xAAAAAAAAAAAAD//xEAAAAAAAAAAAD//xIAAAAAAAAAAAAAABIAAAAAAAAAAAABABIAAAAAAAAAAAACABIAAAAAAAAAAAADABIAAAAAAAAAAAAEABIAAAAAAAAAAAAFABIAAAAAAAAAAAAGABIAAAAAAAAAAAAHABIAAAAAAAAAAAAIABIAAAAAAAAAAAAJABIAAAAAAAAAAAAKABIAAAAAAAAAAAALABIAAAAAAAAAAAAMABIAAAAAAAAAAAANABIAAAAAAAAAAAAOABIAAAAAAAAAAAAPABIAAAAAAAAAAAAQABIAAAAAAAAAAAARABIAAAAAAAAAAAASABIAAAAAAAAAAAATABIAAAAAAAAAAAAUABIAAAAAAAAAAAAVABIAAAAAAAAAAAAWABIAAAAAAAAAAAAXABIAAAAAAAAAAAAYABIAAAAAAAAAAAAZABIAAAAAAAAAAAAaABIAAAAAAAAAAAAbABIAAAAAAAAAAAAcABIAAAAAAAAAAAAdABIAAAAAAAAAAAAeABIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_j2d7s")
+
+[node name="camera" type="TileMapLayer" parent="."]
+visible = false
+tile_map_data = PackedByteArray("AAD//xMAAAABAAAAAAD/////AAABAAAAAAAeAP//AAABAAAAAAAeABMAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_hpo3w")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="sky" type="Sprite2D" parent="ParallaxBackground/sky"]
+position = Vector2(240, 148)
+texture = ExtResource("3_ffckj")
+
+[node name="floor" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1200, 0)
+
+[node name="floor" type="Sprite2D" parent="ParallaxBackground/floor"]
+position = Vector2(586, 288)
+texture = ExtResource("3_d1pjq")
+
+[node name="Control" type="Control" parent="ParallaxBackground"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="ParallaxBackground/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.5
+offset_top = -101.0
+offset_right = 220.5
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "按空格开始游戏"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("5_k6awq")]
+position = Vector2(49, 264)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="cactus_point" type="Marker2D" parent="."]
+position = Vector2(508, 290)
+
+[connection signal="die" from="Player" to="." method="_on_player_die"]

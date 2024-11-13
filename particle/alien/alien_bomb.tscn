@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://csku1pu4ejp5a"]
+
+[ext_resource type="Texture2D" uid="uid://icm4tyuc3n6t" path="res://particle/alien/alien_bomb-Sheet.png" id="1_t2ju5"]
+[ext_resource type="Script" path="res://particle/alien/alien_bomb.gd" id="2_55ewh"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h3yfs"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_lbp7p"]
+offsets = PackedFloat32Array(0, 0.690583, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="alien_bomb" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_h3yfs")
+emitting = false
+amount = 512
+lifetime = 4.2
+one_shot = true
+speed_scale = 2.75
+explosiveness = 1.0
+texture = ExtResource("1_t2ju5")
+emission_shape = 2
+emission_sphere_radius = 1.76
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, -0.125)
+initial_velocity_min = 5.0
+initial_velocity_max = 50.0
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+damping_min = 11.0
+damping_max = 23.0
+color = Color(0.643137, 0.392157, 0.701961, 1)
+color_ramp = SubResource("Gradient_lbp7p")
+anim_speed_min = 3.0
+anim_speed_max = 4.2
+anim_offset_max = 1.0
+script = ExtResource("2_55ewh")
