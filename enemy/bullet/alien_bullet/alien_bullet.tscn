@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b15g2saec5rts"]
+
+[ext_resource type="Texture2D" uid="uid://be0pgl6pjq2ri" path="res://enemy/bullet/alien_bullet/alien_bullet.png" id="1_efqnr"]
+[ext_resource type="Script" path="res://enemy/bullet/alien_bullet/alien_bullet.gd" id="1_r8nmv"]
+[ext_resource type="Script" path="res://classes/Hitbox.gd" id="2_wqjyj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tlam"]
+size = Vector2(8, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bltd8"]
+size = Vector2(8, 2)
+
+[node name="alien_bullet" type="Node2D"]
+script = ExtResource("1_r8nmv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_efqnr")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 4096
+collision_mask = 16
+script = ExtResource("2_wqjyj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_5tlam")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_bltd8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.38419e-07, 0)
+scale = Vector2(0.4, 0.1)
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

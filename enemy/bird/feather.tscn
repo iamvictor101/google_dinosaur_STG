@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwq30k8tntk2"]
+
+[ext_resource type="Texture2D" uid="uid://4627p1xq50et" path="res://enemy/bird/feather.png" id="1_new3e"]
+[ext_resource type="Script" path="res://enemy/bird/feather.gd" id="1_xycue"]
+
+[sub_resource type="Gradient" id="Gradient_5s8tw"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Feather" type="Node2D"]
+script = ExtResource("1_xycue")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 11
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_new3e")
+emission_shape = 2
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 500)
+initial_velocity_max = 75.18
+angular_velocity_max = 200.79
+angle_max = 360.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_5s8tw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

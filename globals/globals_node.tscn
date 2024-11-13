@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhihi2kuhel5d"]
+
+[ext_resource type="Script" path="res://globals/globals_node.gd" id="1_kn5m0"]
+[ext_resource type="Script" path="res://classes/SaveOperate.gd" id="3_3nexo"]
+[ext_resource type="Script" path="res://classes/Stats.gd" id="4_1g303"]
+[ext_resource type="PackedScene" uid="uid://dx0hucl6ytngh" path="res://cursor/mouse_cursor.tscn" id="4_3j60j"]
+
+[node name="Globals_Node" type="Node"]
+process_mode = 3
+script = ExtResource("1_kn5m0")
+
+[node name="Player_Stats" type="Node" parent="."]
+script = ExtResource("4_1g303")
+
+[node name="mouse_cursor" parent="." instance=ExtResource("4_3j60j")]
+layer = 100
+
+[node name="SaveOperate" type="Node" parent="."]
+script = ExtResource("3_3nexo")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 53.0
+text = "bilibili
+夏空真宇"

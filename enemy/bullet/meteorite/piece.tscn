@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://tm8jx648np07"]
+
+[ext_resource type="Texture2D" uid="uid://b7ddgka4y06bq" path="res://particle/gravel/gravel-Sheet.png" id="1_0qyh2"]
+[ext_resource type="Script" path="res://enemy/bullet/meteorite/piece.gd" id="2_wnle6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tghvg"]
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_qf8ys"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Piece" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_tghvg")
+emitting = false
+amount = 25
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_0qyh2")
+spread = 180.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 1.0
+initial_velocity_max = 50.0
+angle_max = 360.0
+scale_amount_min = 0.25
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_qf8ys")
+anim_speed_min = 1.0
+anim_speed_max = 2.0
+script = ExtResource("2_wnle6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

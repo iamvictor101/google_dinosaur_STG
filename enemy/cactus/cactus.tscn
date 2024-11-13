@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://s3d3jw1yu6n4"]
+
+[ext_resource type="PackedScene" uid="uid://dr48b86hs8ooo" path="res://enemy/enemy.tscn" id="1_i7cy1"]
+[ext_resource type="Texture2D" uid="uid://c08aqfebxj7qd" path="res://enemy/cactus/cactus.png" id="2_m7pox"]
+[ext_resource type="Script" path="res://enemy/cactus/cactus.gd" id="2_ugxcq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tdjb"]
+size = Vector2(3, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohvas"]
+size = Vector2(5, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_piodg"]
+size = Vector2(7, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjg4q"]
+size = Vector2(8, 4)
+
+[node name="cactus" instance=ExtResource("1_i7cy1")]
+script = ExtResource("2_ugxcq")
+
+[node name="Sprite2D" parent="graphics" index="0"]
+position = Vector2(0, -22)
+texture = ExtResource("2_m7pox")
+hframes = 11
+region_enabled = true
+region_rect = Rect2(0, 0, 352, 64)
+
+[node name="Hitbox" parent="graphics" index="1"]
+visible = false
+collision_layer = 32
+
+[node name="s" type="CollisionShape2D" parent="graphics/Hitbox" index="0"]
+position = Vector2(-0.5, -12.5)
+shape = SubResource("RectangleShape2D_8tdjb")
+disabled = true
+
+[node name="m" type="CollisionShape2D" parent="graphics/Hitbox" index="1"]
+position = Vector2(-0.5, -15)
+shape = SubResource("RectangleShape2D_ohvas")
+disabled = true
+
+[node name="l" type="CollisionShape2D" parent="graphics/Hitbox" index="2"]
+position = Vector2(-0.5, -21.5)
+shape = SubResource("RectangleShape2D_piodg")
+disabled = true
+
+[node name="Hurtbox" parent="graphics" index="2"]
+visible = false
+collision_mask = 8
+
+[node name="s" type="CollisionShape2D" parent="graphics/Hurtbox" index="0"]
+position = Vector2(-0.5, -12.5)
+shape = SubResource("RectangleShape2D_8tdjb")
+disabled = true
+
+[node name="m" type="CollisionShape2D" parent="graphics/Hurtbox" index="1"]
+position = Vector2(-0.5, -15)
+shape = SubResource("RectangleShape2D_ohvas")
+disabled = true
+
+[node name="l" type="CollisionShape2D" parent="graphics/Hurtbox" index="2"]
+position = Vector2(-0.5, -21.5)
+shape = SubResource("RectangleShape2D_piodg")
+disabled = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+shape = SubResource("RectangleShape2D_yjg4q")
+
+[node name="Timer" type="Timer" parent="." index="6"]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[connection signal="hurt" from="graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=3 uid="uid://ocly1kpsijoa"]
+
+[ext_resource type="PackedScene" uid="uid://dr48b86hs8ooo" path="res://enemy/enemy.tscn" id="1_52406"]
+[ext_resource type="Texture2D" uid="uid://cd8r1d7o6rxpm" path="res://enemy/alien/alien-Sheet.png" id="2_01bsv"]
+[ext_resource type="Script" path="res://enemy/alien/alien.gd" id="2_rphny"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cmmqw"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxfyn"]
+size = Vector2(18, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_481k0"]
+size = Vector2(18, 16)
+
+[sub_resource type="Animation" id="Animation_t8el5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphics/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_01bsv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("graphics/Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("graphics/Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("graphics/Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qg0fg"]
+resource_name = "fly"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphics/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_01bsv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("graphics/Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("graphics/Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("graphics/Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljmjw"]
+_data = {
+"RESET": SubResource("Animation_t8el5"),
+"fly": SubResource("Animation_qg0fg")
+}
+
+[node name="alien" instance=ExtResource("1_52406")]
+script = ExtResource("2_rphny")
+
+[node name="Sprite2D" parent="graphics" index="0"]
+texture = ExtResource("2_01bsv")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+
+[node name="Hitbox" parent="graphics" index="1"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="graphics/Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_cmmqw")
+disabled = true
+
+[node name="Hurtbox" parent="graphics" index="2"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="graphics/Hurtbox" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_fxfyn")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_481k0")
+disabled = true
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_ljmjw")
+}
+autoplay = "fly"
+
+[connection signal="hurt" from="graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]

@@ -1,0 +1,187 @@
+[gd_scene load_steps=13 format=3 uid="uid://crrlji6kwth66"]
+
+[ext_resource type="Texture2D" uid="uid://gpodkprk5o0v" path="res://enemy/alien/bag/alien_bag.png" id="1_f72t8"]
+[ext_resource type="Script" path="res://enemy/alien/bag/alien_bag.gd" id="1_sg31h"]
+[ext_resource type="Script" path="res://classes/Hurtbox.gd" id="3_c3f02"]
+[ext_resource type="Texture2D" uid="uid://icm4tyuc3n6t" path="res://particle/alien/alien_bomb-Sheet.png" id="4_ohx0t"]
+
+[sub_resource type="Animation" id="Animation_hcvt4"]
+resource_name = "always"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_f72t8")]
+}
+
+[sub_resource type="Animation" id="Animation_7ewug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_f72t8")]
+}
+
+[sub_resource type="Animation" id="Animation_2t6wx"]
+resource_name = "free"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvkbe"]
+_data = {
+"RESET": SubResource("Animation_7ewug"),
+"always": SubResource("Animation_hcvt4"),
+"free": SubResource("Animation_2t6wx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4rrh"]
+size = Vector2(22, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0261g"]
+size = Vector2(22, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pixtl"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_p05ad"]
+offsets = PackedFloat32Array(0, 0.636771, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="alien_bag" type="Node2D"]
+script = ExtResource("1_sg31h")
+metadata/_edit_vertical_guides_ = [11.0]
+metadata/_edit_horizontal_guides_ = [-4.0]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("1_f72t8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_bvkbe")
+}
+autoplay = "always"
+
+[node name="Hurtbox" type="Area2D" parent="Node2D"]
+visible = false
+collision_layer = 64
+collision_mask = 8
+script = ExtResource("3_c3f02")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Hurtbox"]
+shape = SubResource("RectangleShape2D_e4rrh")
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+shape = SubResource("RectangleShape2D_0261g")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Node2D"]
+material = SubResource("CanvasItemMaterial_pixtl")
+emitting = false
+amount = 63
+lifetime = 2.71
+texture = ExtResource("4_ohx0t")
+emission_shape = 3
+emission_rect_extents = Vector2(11, 4)
+gravity = Vector2(0, 0)
+radial_accel_min = 1.48
+radial_accel_max = 5.93
+color = Color(0.643137, 0.392157, 0.701961, 1)
+color_ramp = SubResource("Gradient_p05ad")
+anim_speed_min = 4.0
+anim_speed_max = 11.0
+anim_offset_max = 1.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Node2D"]
+position = Vector2(2.98023e-07, 2.38419e-07)
+scale = Vector2(1.2, 0.5)
+
+[connection signal="hurt" from="Node2D/Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="body_entered" from="Node2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="Node2D/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

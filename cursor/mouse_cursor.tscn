@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dx0hucl6ytngh"]
+
+[ext_resource type="Script" path="res://cursor/mouse_cursor.gd" id="1_4qn6v"]
+[ext_resource type="Texture2D" uid="uid://ctrvukujrehrd" path="res://cursor/cursor-Sheet.png" id="1_rhk26"]
+[ext_resource type="Texture2D" uid="uid://dqalerc67qosm" path="res://ui/button_focus.png" id="2_sjbq4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fctsb"]
+atlas = ExtResource("2_sjbq4")
+region = Rect2(40, 24, 20, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxppm"]
+atlas = ExtResource("1_rhk26")
+region = Rect2(0, 0, 11, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywd1l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fctsb")
+}],
+"loop": true,
+"name": &"aim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxppm")
+}],
+"loop": true,
+"name": &"mouse",
+"speed": 5.0
+}]
+
+[node name="mouse_cursor" type="CanvasLayer"]
+script = ExtResource("1_4qn6v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ywd1l")
+animation = &"mouse"
+autoplay = "mouse"

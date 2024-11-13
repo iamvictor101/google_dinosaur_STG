@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7rwsrerht22q"]
+
+[ext_resource type="Script" path="res://enemy/boss/boss.gd" id="1_7th8n"]
+[ext_resource type="Script" path="res://classes/StateMachine.gd" id="1_12tn1"]
+[ext_resource type="Script" path="res://classes/Hitbox.gd" id="1_soj4a"]
+[ext_resource type="Script" path="res://classes/Hurtbox.gd" id="2_d6b1g"]
+[ext_resource type="Script" path="res://classes/Stats.gd" id="2_ywi3u"]
+
+[node name="boss" type="CharacterBody2D"]
+light_mask = 4
+collision_layer = 4
+collision_mask = 129
+script = ExtResource("1_7th8n")
+
+[node name="graphics" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="graphics"]
+light_mask = 4
+
+[node name="Hitbox" type="Area2D" parent="graphics"]
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_soj4a")
+
+[node name="Hurtbox" type="Area2D" parent="graphics"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("2_d6b1g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("1_12tn1")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("2_ywi3u")
+
+[node name="tweentimer" type="Timer" parent="."]
+one_shot = true

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd3kmqf2k3pjo"]
+
+[ext_resource type="Texture2D" uid="uid://d1ehb73uw3sdi" path="res://enemy/bullet/fuck/fuck-Sheet.png" id="1_ol5jo"]
+[ext_resource type="Script" path="res://enemy/bullet/fuck/fuck.gd" id="1_wsky7"]
+[ext_resource type="Script" path="res://classes/Hitbox.gd" id="2_glmsv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nayml"]
+size = Vector2(22, 8)
+
+[node name="Fuck" type="Node2D"]
+scale = Vector2(1.75, 1.75)
+script = ExtResource("1_wsky7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ol5jo")
+hframes = 8
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 16)
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("2_glmsv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_nayml")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(5.96046e-08, 2.38419e-07)
+scale = Vector2(1.1, 0.4)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

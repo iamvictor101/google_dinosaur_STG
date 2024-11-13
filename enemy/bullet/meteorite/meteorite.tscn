@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjnlbqodwkvpr"]
+
+[ext_resource type="Texture2D" uid="uid://dn225yyg4gopa" path="res://enemy/bullet/meteorite/meteorite.png" id="1_a7dhe"]
+[ext_resource type="Script" path="res://enemy/bullet/meteorite/meteorite.gd" id="1_w0arq"]
+[ext_resource type="Script" path="res://classes/Hitbox.gd" id="3_5nsob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_urs6q"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7aj0g"]
+radius = 3.16228
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mvlno"]
+radius = 4.0
+
+[node name="Meteorite" type="RigidBody2D"]
+collision_layer = 4096
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_w0arq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_a7dhe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_urs6q")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 40
+collision_mask = 80
+script = ExtResource("3_5nsob")
+atk = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_7aj0g")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mvlno")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 11
+speed_scale = 2.0
+emission_shape = 2
+emission_sphere_radius = 2.55
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color = Color(0.321728, 0.321728, 0.321728, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

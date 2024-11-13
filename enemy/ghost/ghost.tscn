@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cebetqx6u5rln"]
+
+[ext_resource type="PackedScene" uid="uid://dr48b86hs8ooo" path="res://enemy/enemy.tscn" id="1_6xt2g"]
+[ext_resource type="Script" path="res://enemy/ghost/ghost.gd" id="2_2fyan"]
+[ext_resource type="Texture2D" uid="uid://6hmft3thq3s6" path="res://enemy/ghost/ghost.png" id="2_54ub0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fxgof"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3atd7"]
+radius = 4.12311
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ys1v6"]
+
+[node name="ghost" instance=ExtResource("1_6xt2g")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_2fyan")
+speed = 120.0
+v = Vector2(0, 0)
+metadata/_edit_horizontal_guides_ = [-7.0]
+
+[node name="Sprite2D" parent="graphics" index="0"]
+texture = ExtResource("2_54ub0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="graphics/Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_fxgof")
+
+[node name="Hurtbox" parent="graphics" index="2"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="graphics/Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_3atd7")
+disabled = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CapsuleShape2D_ys1v6")
+disabled = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="6"]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(1.6, 1.6)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
